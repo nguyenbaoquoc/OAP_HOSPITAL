@@ -1,0 +1,88 @@
+{
+  "pageType": "form",
+  "pageCode": "H001_FORM",
+  "metadataVersion": 2,
+  "title": "Chi tiết Bệnh nhân",
+  "dataSource": {
+    "type": "query",
+    "tableName": "DEMO_PATIENTS",
+    "keyField": "PATIENT_ID",
+    "query": "SELECT PATIENT_ID, FIRST_NAME, LAST_NAME, GENDER, DATE_OF_BIRTH, CONTACT_NUMBER, ADDRESS, REGISTRATION_DATE, INSURANCE_PROVIDER, INSURANCE_NUMBER, EMAIL FROM DEMO_PATIENTS WHERE PATIENT_ID = :id",
+    "saveQuery": "DECLARE v_patient_id VARCHAR2(20) := :PATIENT_ID; v_first_name VARCHAR2(20) := :FIRST_NAME; v_last_name VARCHAR2(20) := :LAST_NAME; v_gender VARCHAR2(20) := :GENDER; v_dob DATE := :DATE_OF_BIRTH; v_contact VARCHAR2(50) := :CONTACT_NUMBER; v_address VARCHAR2(20) := :ADDRESS; v_reg_date DATE := :REGISTRATION_DATE; v_ins_prov VARCHAR2(20) := :INSURANCE_PROVIDER; v_ins_num VARCHAR2(20) := :INSURANCE_NUMBER; v_email VARCHAR2(20) := :EMAIL; BEGIN IF :id IS NULL THEN INSERT INTO DEMO_PATIENTS (PATIENT_ID, FIRST_NAME, LAST_NAME, GENDER, DATE_OF_BIRTH, CONTACT_NUMBER, ADDRESS, REGISTRATION_DATE, INSURANCE_PROVIDER, INSURANCE_NUMBER, EMAIL) VALUES (v_patient_id, v_first_name, v_last_name, v_gender, v_dob, v_contact, v_address, v_reg_date, v_ins_prov, v_ins_num, v_email); ELSE UPDATE DEMO_PATIENTS SET FIRST_NAME = v_first_name, LAST_NAME = v_last_name, GENDER = v_gender, DATE_OF_BIRTH = v_dob, CONTACT_NUMBER = v_contact, ADDRESS = v_address, REGISTRATION_DATE = v_reg_date, INSURANCE_PROVIDER = v_ins_prov, INSURANCE_NUMBER = v_ins_num, EMAIL = v_email WHERE PATIENT_ID = v_patient_id; END IF; COMMIT; END;"
+  },
+  "regions": [
+    {
+      "id": "main_region",
+      "type": "plain",
+      "title": "Thông tin Bệnh nhân",
+      "fields": [
+        {
+          "name": "PATIENT_ID",
+          "type": "text",
+          "label": "Mã Bệnh nhân",
+          "required": true
+        },
+        {
+          "name": "FIRST_NAME",
+          "type": "text",
+          "label": "Họ"
+        },
+        {
+          "name": "LAST_NAME",
+          "type": "text",
+          "label": "Tên"
+        },
+        {
+          "name": "GENDER",
+          "type": "select",
+          "label": "Giới tính",
+          "lov": {
+            "manual": [
+              { "label": "Nam", "value": "M" },
+              { "label": "Nữ", "value": "F" }
+            ]
+          }
+        },
+        {
+          "name": "DATE_OF_BIRTH",
+          "type": "date",
+          "label": "Ngày sinh",
+          "format": "dd/MM/yyyy"
+        },
+        {
+          "name": "CONTACT_NUMBER",
+          "type": "text",
+          "label": "Số điện thoại"
+        },
+        {
+          "name": "ADDRESS",
+          "type": "text",
+          "label": "Địa chỉ"
+        },
+        {
+          "name": "REGISTRATION_DATE",
+          "type": "date",
+          "label": "Ngày đăng ký",
+          "format": "dd/MM/yyyy"
+        },
+        {
+          "name": "EMAIL",
+          "type": "text",
+          "label": "Email"
+        },
+        {
+          "name": "INSURANCE_PROVIDER",
+          "type": "text",
+          "label": "Nhà cung cấp Bảo hiểm"
+        },
+        {
+          "name": "INSURANCE_NUMBER",
+          "type": "text",
+          "label": "Số Bảo hiểm"
+        }
+      ]
+    }
+  ],
+  "appCode": "hp002",
+  "workspaceCode": "TASECOLAND"
+}

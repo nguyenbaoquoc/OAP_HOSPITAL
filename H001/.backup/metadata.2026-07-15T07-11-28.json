@@ -1,0 +1,363 @@
+{
+  "pageType": "form",
+  "pageCode": "H001",
+  "metadataVersion": 2,
+  "title": "Hồ sơ Bệnh nhân",
+  "dataSource": {
+    "type": "none"
+  },
+  "layout": {
+    "orientation": "horizontal",
+    "panes": [
+      {
+        "id": "filters_pane",
+        "regionIds": [
+          "filter_region"
+        ],
+        "size": "260px",
+        "collapsible": true
+      },
+      {
+        "id": "center",
+        "regionIds": [
+          "kpi_region",
+          "list_region"
+        ],
+        "size": "1fr"
+      }
+    ],
+    "type": "splitter"
+  },
+  "regions": [
+    {
+      "id": "filter_region",
+      "type": "plain",
+      "fields": [
+        {
+          "name": "f_search_name",
+          "type": "text",
+          "label": "SEARCH_NAME_LABEL",
+          "placeholder": "Tìm kiếm Họ và Tên...",
+          "layout": {
+            "col": 1,
+            "colSpan": 12,
+            "row": 1
+          }
+        },
+        {
+          "name": "f_search_phone",
+          "type": "text",
+          "label": "SEARCH_PHONE_LABEL",
+          "placeholder": "Tìm kiếm Số điện thoại...",
+          "layout": {
+            "col": 1,
+            "colSpan": 12,
+            "row": 2
+          }
+        },
+        {
+          "name": "f_gender",
+          "type": "select",
+          "label": "COL_GENDER",
+          "defaultValue": "",
+          "showClearButton": true,
+          "lov": {
+            "manual": [
+              {
+                "label": "Nam",
+                "value": "M"
+              },
+              {
+                "label": "Nữ",
+                "value": "F"
+              }
+            ]
+          },
+          "layout": {
+            "col": 1,
+            "colSpan": 12,
+            "row": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "kpi_region",
+      "type": "plain",
+      "fields": [
+        {
+          "name": "w_total",
+          "type": "widget",
+          "layout": {
+            "col": 1,
+            "colSpan": 3,
+            "row": 1
+          },
+          "metadata": {
+            "icon": "users",
+            "color": "blue",
+            "title": "w_total",
+            "dataSource": {
+              "type": "query",
+              "bindVariables": [
+                {
+                  "name": "p_search_name",
+                  "sourceField": "f_search_name"
+                },
+                {
+                  "name": "p_search_phone",
+                  "sourceField": "f_search_phone"
+                },
+                {
+                  "name": "p_gender",
+                  "sourceField": "f_gender"
+                }
+              ],
+              "query": "SELECT COUNT(*) AS VALUE FROM DEMO_PATIENTS WHERE (:p_search_name IS NULL OR LOWER(FIRST_NAME || ' ' || LAST_NAME) LIKE LOWER('%'||:p_search_name||'%')) AND (:p_search_phone IS NULL OR CONTACT_NUMBER LIKE '%'||:p_search_phone||'%') AND (:p_gender IS NULL OR GENDER = :p_gender)"
+            }
+          }
+        },
+        {
+          "name": "w_cols",
+          "type": "widget",
+          "layout": {
+            "col": 4,
+            "colSpan": 3,
+            "row": 1
+          },
+          "metadata": {
+            "icon": "list",
+            "color": "green",
+            "title": "w_cols",
+            "dataSource": {
+              "type": "query",
+              "query": "SELECT 11 AS VALUE FROM DUAL"
+            }
+          }
+        },
+        {
+          "name": "w_male",
+          "type": "widget",
+          "layout": {
+            "col": 7,
+            "colSpan": 3,
+            "row": 1
+          },
+          "metadata": {
+            "icon": "user",
+            "color": "purple",
+            "title": "w_male",
+            "dataSource": {
+              "type": "query",
+              "bindVariables": [
+                {
+                  "name": "p_search_name",
+                  "sourceField": "f_search_name"
+                },
+                {
+                  "name": "p_search_phone",
+                  "sourceField": "f_search_phone"
+                }
+              ],
+              "query": "SELECT COUNT(*) AS VALUE FROM DEMO_PATIENTS WHERE GENDER='M' AND (:p_search_name IS NULL OR LOWER(FIRST_NAME || ' ' || LAST_NAME) LIKE LOWER('%'||:p_search_name||'%')) AND (:p_search_phone IS NULL OR CONTACT_NUMBER LIKE '%'||:p_search_phone||'%')"
+            }
+          }
+        },
+        {
+          "name": "w_female",
+          "type": "widget",
+          "layout": {
+            "col": 10,
+            "colSpan": 3,
+            "row": 1
+          },
+          "metadata": {
+            "icon": "user-plus",
+            "color": "pink",
+            "title": "w_female",
+            "dataSource": {
+              "type": "query",
+              "bindVariables": [
+                {
+                  "name": "p_search_name",
+                  "sourceField": "f_search_name"
+                },
+                {
+                  "name": "p_search_phone",
+                  "sourceField": "f_search_phone"
+                }
+              ],
+              "query": "SELECT COUNT(*) AS VALUE FROM DEMO_PATIENTS WHERE GENDER='F' AND (:p_search_name IS NULL OR LOWER(FIRST_NAME || ' ' || LAST_NAME) LIKE LOWER('%'||:p_search_name||'%')) AND (:p_search_phone IS NULL OR CONTACT_NUMBER LIKE '%'||:p_search_phone||'%')"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "list_region",
+      "type": "plain",
+      "fields": [
+        {
+          "name": "tbl_patients",
+          "type": "datagrid",
+          "layout": {
+            "colSpan": 12
+          },
+          "metadata": {
+            "keyField": "PATIENT_ID",
+            "title": "tbl_patients",
+            "pageType": "table",
+            "dataSource": {
+              "type": "query",
+              "tableName": "DEMO_PATIENTS",
+              "keyField": "PATIENT_ID",
+              "saveMode": "auto",
+              "bindVariables": [
+                {
+                  "name": "p_search_name",
+                  "sourceField": "f_search_name"
+                },
+                {
+                  "name": "p_search_phone",
+                  "sourceField": "f_search_phone"
+                },
+                {
+                  "name": "p_gender",
+                  "sourceField": "f_gender"
+                }
+              ],
+              "query": "SELECT PATIENT_ID, FIRST_NAME, LAST_NAME, GENDER, DATE_OF_BIRTH, CONTACT_NUMBER, ADDRESS, REGISTRATION_DATE, INSURANCE_PROVIDER, INSURANCE_NUMBER, EMAIL FROM DEMO_PATIENTS WHERE (:p_search_name IS NULL OR LOWER(FIRST_NAME || ' ' || LAST_NAME) LIKE LOWER('%'||:p_search_name||'%')) AND (:p_search_phone IS NULL OR CONTACT_NUMBER LIKE '%'||:p_search_phone||'%') AND (:p_gender IS NULL OR GENDER = :p_gender) ORDER BY PATIENT_ID"
+            },
+            "tableConfig": {
+              "editing": {
+                "allowAdding": true,
+                "allowDeleting": false,
+                "allowUpdating": true,
+                "mode": "batch"
+              },
+              "height": "calc(100vh - 280px)",
+              "inlineEdit": true,
+              "pageSize": 25
+            },
+            "columns": [
+              {
+                "key": "PATIENT_ID",
+                "dataType": "string",
+                "label": "COL_PATIENT_ID",
+                "visible": true,
+                "width": 130
+              },
+              {
+                "key": "FIRST_NAME",
+                "dataType": "string",
+                "label": "COL_FIRST_NAME",
+                "visible": true,
+                "width": 120
+              },
+              {
+                "key": "LAST_NAME",
+                "dataType": "string",
+                "label": "COL_LAST_NAME",
+                "visible": true,
+                "width": 120
+              },
+              {
+                "key": "GENDER",
+                "dataType": "string",
+                "label": "COL_GENDER",
+                "visible": true,
+                "width": 100
+              },
+              {
+                "key": "DATE_OF_BIRTH",
+                "dataType": "date",
+                "label": "COL_DATE_OF_BIRTH",
+                "visible": true,
+                "format": "dd/MM/yyyy",
+                "width": 120
+              },
+              {
+                "key": "CONTACT_NUMBER",
+                "dataType": "string",
+                "label": "COL_CONTACT_NUMBER",
+                "visible": true,
+                "width": 140
+              },
+              {
+                "key": "ADDRESS",
+                "dataType": "string",
+                "label": "COL_ADDRESS",
+                "visible": true,
+                "minWidth": 200
+              },
+              {
+                "key": "REGISTRATION_DATE",
+                "dataType": "date",
+                "label": "COL_REGISTRATION_DATE",
+                "visible": true,
+                "format": "dd/MM/yyyy",
+                "width": 120
+              },
+              {
+                "key": "INSURANCE_PROVIDER",
+                "dataType": "string",
+                "label": "COL_INSURANCE_PROVIDER",
+                "visible": true,
+                "width": 180
+              },
+              {
+                "key": "INSURANCE_NUMBER",
+                "dataType": "string",
+                "label": "COL_INSURANCE_NUMBER",
+                "visible": true,
+                "width": 150
+              },
+              {
+                "key": "EMAIL",
+                "dataType": "string",
+                "label": "COL_EMAIL",
+                "visible": true,
+                "width": 180
+              },
+              {
+                "key": "ROW_ACTIONS",
+                "label": "COL_ACTIONS",
+                "type": "action",
+                "width": 100,
+                "fixed": true,
+                "fixedPosition": "right",
+                "buttons": [
+                  {
+                    "name": "delete_patient",
+                    "label": "Xóa",
+                    "hint": "Xóa bệnh nhân ngay lập tức",
+                    "icon": "trash",
+                    "variant": "danger",
+                    "actionConfig": {
+                      "type": "command",
+                      "commandMode": "plsql",
+                      "query": "BEGIN DELETE FROM DEMO_PATIENTS WHERE PATIENT_ID = :PATIENT_ID; END;",
+                      "bindVariables": [
+                        {
+                          "name": "PATIENT_ID",
+                          "sourceField": "PATIENT_ID",
+                          "source": "rowData"
+                        }
+                      ],
+                      "refreshAfter": true,
+                      "successMessage": "Đã xóa bệnh nhân thành công!"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "appCode": "hp002",
+  "workspaceCode": "TASECOLAND",
+  "sourceAppCode": "hp002",
+  "sourceWorkspaceCode": "TASECOLAND"
+}

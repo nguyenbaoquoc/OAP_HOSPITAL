@@ -1,0 +1,78 @@
+{
+  "en": {
+    "columns": {
+      "PATIENT_ID": "Mã Bệnh Nhân",
+      "FIRST_NAME": "Họ",
+      "LAST_NAME": "Tên",
+      "GENDER": "Giới tính",
+      "DATE_OF_BIRTH": "Ngày sinh",
+      "CONTACT_NUMBER": "Số điện thoại",
+      "ADDRESS": "Địa chỉ",
+      "REGISTRATION_DATE": "Ngày đăng ký",
+      "INSURANCE_PROVIDER": "Nhà cung cấp Bảo hiểm",
+      "INSURANCE_NUMBER": "Số Bảo hiểm",
+      "EMAIL": "Email",
+      "COL_ACTIONS": "Thao tác"
+    },
+    "fields": {
+      "f_search_name": "Tìm kiếm Họ và Tên",
+      "f_search_phone": "Tìm kiếm Số điện thoại",
+      "f_gender": "Giới tính",
+      "tbl_patients": "Danh sách Bệnh nhân",
+      "w_total": "Số Bệnh nhân",
+      "w_cols": "Số cột thông tin",
+      "w_male": "Nam giới",
+      "w_female": "Nữ giới"
+    },
+    "regions": {
+      "filter_region": "Bộ lọc",
+      "kpi_region": "Chỉ số thống kê",
+      "list_region": "Danh sách"
+    },
+    "title": "Hồ sơ Bệnh nhân",
+    "widgets": {
+      "w_total": "Số Bệnh nhân",
+      "w_cols": "Số cột thông tin",
+      "w_male": "Nam giới",
+      "w_female": "Nữ giới"
+    }
+  },
+  "vi": {
+    "columns": {
+      "PATIENT_ID": "Mã Bệnh Nhân",
+      "FIRST_NAME": "Họ",
+      "LAST_NAME": "Tên",
+      "GENDER": "Giới tính",
+      "DATE_OF_BIRTH": "Ngày sinh",
+      "CONTACT_NUMBER": "Số điện thoại",
+      "ADDRESS": "Địa chỉ",
+      "REGISTRATION_DATE": "Ngày đăng ký",
+      "INSURANCE_PROVIDER": "Nhà cung cấp Bảo hiểm",
+      "INSURANCE_NUMBER": "Số Bảo hiểm",
+      "EMAIL": "Email",
+      "COL_ACTIONS": "Thao tác"
+    },
+    "fields": {
+      "f_search_name": "Tìm kiếm Họ và Tên",
+      "f_search_phone": "Tìm kiếm Số điện thoại",
+      "f_gender": "Giới tính",
+      "tbl_patients": "Danh sách Bệnh nhân",
+      "w_total": "Số Bệnh nhân",
+      "w_cols": "Số cột thông tin",
+      "w_male": "Nam giới",
+      "w_female": "Nữ giới"
+    },
+    "regions": {
+      "filter_region": "Bộ lọc",
+      "kpi_region": "Chỉ số thống kê",
+      "list_region": "Danh sách"
+    },
+    "title": "Hồ sơ Bệnh nhân",
+    "widgets": {
+      "w_total": "Số Bệnh nhân",
+      "w_cols": "Số cột thông tin",
+      "w_male": "Nam giới",
+      "w_female": "Nữ giới"
+    }
+  }
+}
