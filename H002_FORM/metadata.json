@@ -1,0 +1,118 @@
+{
+  "pageType": "form",
+  "pageName": "Biểu mẫu Bác sĩ",
+  "pageCode": "H002_FORM",
+  "layout": {
+    "type": "splitter",
+    "orientation": "horizontal",
+    "panes": [
+      {
+        "id": "doc_form_center",
+        "size": "1fr",
+        "regionIds": [
+          "toolbar_reg",
+          "form_reg"
+        ]
+      }
+    ]
+  },
+  "regions": [
+    {
+      "id": "toolbar_reg",
+      "type": "plain",
+      "fields": [
+        {
+          "name": "dx_toolbar",
+          "type": "toolbar",
+          "align": "right",
+          "items": [
+            {
+              "type": "button",
+              "text": "Làm mới",
+              "icon": "fa-refresh",
+              "action": "refresh",
+              "stylingMode": "outlined"
+            },
+            {
+              "type": "button",
+              "text": "Cập nhật",
+              "icon": "fa-save",
+              "action": "save",
+              "stylingMode": "contained",
+              "color": "success"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "form_reg",
+      "type": "card",
+      "title": "title",
+      "fields": [
+        {
+          "name": "FIRST_NAME",
+          "type": "text",
+          "label": "Họ và tên đệm",
+          "layout": { "col": 6 }
+        },
+        {
+          "name": "LAST_NAME",
+          "type": "text",
+          "label": "Tên",
+          "layout": { "col": 6 }
+        },
+        {
+          "name": "SPECIALIZATION",
+          "type": "select",
+          "label": "Chuyên ngành",
+          "options": [
+            { "v": "Dermatology", "l": "Dermatology" },
+            { "v": "Pediatrics", "l": "Pediatrics" },
+            { "v": "Oncology", "l": "Oncology" },
+            { "v": "Cardiology", "l": "Cardiology" },
+            { "v": "Neurology", "l": "Neurology" },
+            { "v": "Psychiatry", "l": "Psychiatry" },
+            { "v": "Orthopedics", "l": "Orthopedics" },
+            { "v": "Ophthalmology", "l": "Ophthalmology" },
+            { "v": "Gastroenterology", "l": "Gastroenterology" },
+            { "v": "Radiology", "l": "Radiology" }
+          ],
+          "layout": { "col": 6 }
+        },
+        {
+          "name": "PHONE_NUMBER",
+          "type": "text",
+          "label": "Số điện thoại",
+          "layout": { "col": 6 }
+        },
+        {
+          "name": "YEARS_EXPERIENCE",
+          "type": "number",
+          "label": "Năm kinh nghiệm",
+          "layout": { "col": 6 }
+        },
+        {
+          "name": "HOSPITAL_BRANCH",
+          "type": "text",
+          "label": "Chi nhánh",
+          "layout": { "col": 6 }
+        },
+        {
+          "name": "EMAIL",
+          "type": "text",
+          "label": "Email",
+          "layout": { "col": 12 }
+        }
+      ]
+    }
+  ],
+  "dataSource": {
+    "type": "query",
+    "query": "SELECT FIRST_NAME, LAST_NAME, SPECIALIZATION, PHONE_NUMBER, YEARS_EXPERIENCE, HOSPITAL_BRANCH, EMAIL FROM APPS.DEMO_DOCTORS WHERE DOCTOR_ID = :p_id",
+    "bindVariables": {
+      "p_id": "p_id"
+    },
+    "saveQuery": "DECLARE\n  v_count NUMBER;\n  v_next_id VARCHAR2(50);\nBEGIN\n  IF :p_id IS NOT NULL THEN\n    UPDATE APPS.DEMO_DOCTORS \n    SET FIRST_NAME = :FIRST_NAME, LAST_NAME = :LAST_NAME, SPECIALIZATION = :SPECIALIZATION, PHONE_NUMBER = :PHONE_NUMBER, YEARS_EXPERIENCE = :YEARS_EXPERIENCE, HOSPITAL_BRANCH = :HOSPITAL_BRANCH, EMAIL = :EMAIL \n    WHERE DOCTOR_ID = :p_id;\n  ELSE\n    SELECT COUNT(*) + 1 INTO v_count FROM APPS.DEMO_DOCTORS;\n    v_next_id := 'D' || LPAD(v_count, 3, '0');\n    INSERT INTO APPS.DEMO_DOCTORS (DOCTOR_ID, FIRST_NAME, LAST_NAME, SPECIALIZATION, PHONE_NUMBER, YEARS_EXPERIENCE, HOSPITAL_BRANCH, EMAIL) \n    VALUES (v_next_id, :FIRST_NAME, :LAST_NAME, :SPECIALIZATION, :PHONE_NUMBER, :YEARS_EXPERIENCE, :HOSPITAL_BRANCH, :EMAIL);\n  END IF;\nEND;"
+  }
+}

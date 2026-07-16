@@ -1,0 +1,16 @@
+{
+  "vi": {
+    "regions": {
+      "filter_region": "Bộ lọc"
+    },
+    "fields": {
+      "f_search_name": "Tên Bác sĩ",
+      "f_search_spec": "Chuyên ngành",
+      "tbl_doctors": "Danh sách Bác sĩ"
+    },
+    "widgets": {
+      "w_total_docs": "Số lượng Bác sĩ",
+      "w_total_specs": "Số lượng Chuyên ngành"
+    }
+  }
+}

@@ -1,0 +1,202 @@
+{
+  "pageType": "form",
+  "pageName": "HM_DOCTORS",
+  "pageCode": "H002",
+  "layout": {
+    "type": "splitter",
+    "orientation": "horizontal",
+    "panes": [
+      {
+        "id": "doc_filter_pane",
+        "size": "260px",
+        "resizable": false,
+        "collapsible": true,
+        "regionIds": [
+          "filter_region"
+        ]
+      },
+      {
+        "id": "doc_list_center",
+        "size": "1fr",
+        "resizable": true,
+        "collapsible": false,
+        "regionIds": [
+          "kpi_region",
+          "list_region"
+        ]
+      }
+    ]
+  },
+  "regions": [
+    {
+      "id": "filter_region",
+      "type": "card",
+      "title": "regions.filter_region",
+      "fields": [
+        {
+          "name": "f_search_name",
+          "type": "text",
+          "label": "fields.f_search_name",
+          "layout": { "col": 12 }
+        },
+        {
+          "name": "f_search_spec",
+          "type": "select",
+          "label": "fields.f_search_spec",
+          "options": [
+            { "v": "Dermatology", "l": "Dermatology" },
+            { "v": "Pediatrics", "l": "Pediatrics" },
+            { "v": "Oncology", "l": "Oncology" },
+            { "v": "Cardiology", "l": "Cardiology" },
+            { "v": "Neurology", "l": "Neurology" },
+            { "v": "Psychiatry", "l": "Psychiatry" },
+            { "v": "Orthopedics", "l": "Orthopedics" },
+            { "v": "Ophthalmology", "l": "Ophthalmology" },
+            { "v": "Gastroenterology", "l": "Gastroenterology" },
+            { "v": "Radiology", "l": "Radiology" }
+          ],
+          "layout": { "col": 12 }
+        }
+      ]
+    },
+    {
+      "id": "kpi_region",
+      "type": "plain",
+      "fields": [
+        {
+          "name": "w_total_docs",
+          "type": "widget",
+          "widgetType": "kpi",
+          "title": "widgets.w_total_docs",
+          "icon": "fa-user-md",
+          "color": "#007bff",
+          "colSpan": 3,
+          "dataSource": {
+            "type": "query",
+            "query": "SELECT COUNT(*) AS VALUE FROM APPS.DEMO_DOCTORS WHERE (UPPER(FIRST_NAME || ' ' || LAST_NAME) LIKE '%' || UPPER(:p_search_name) || '%' OR :p_search_name IS NULL) AND (SPECIALIZATION = :p_search_spec OR :p_search_spec IS NULL)",
+            "bindVariables": {
+              "p_search_name": "f_search_name",
+              "p_search_spec": "f_search_spec"
+            }
+          }
+        },
+        {
+          "name": "w_total_specs",
+          "type": "widget",
+          "widgetType": "kpi",
+          "title": "widgets.w_total_specs",
+          "icon": "fa-stethoscope",
+          "color": "#28a745",
+          "colSpan": 3,
+          "dataSource": {
+            "type": "query",
+            "query": "SELECT COUNT(DISTINCT SPECIALIZATION) AS VALUE FROM APPS.DEMO_DOCTORS WHERE (UPPER(FIRST_NAME || ' ' || LAST_NAME) LIKE '%' || UPPER(:p_search_name) || '%' OR :p_search_name IS NULL) AND (SPECIALIZATION = :p_search_spec OR :p_search_spec IS NULL)",
+            "bindVariables": {
+              "p_search_name": "f_search_name",
+              "p_search_spec": "f_search_spec"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "list_region",
+      "type": "card",
+      "title": "fields.tbl_doctors",
+      "fields": [
+        {
+          "name": "tbl_doctors",
+          "type": "datagrid",
+          "showToolbar": true,
+          "layout": { "col": 12 },
+          "dataSource": {
+            "type": "query",
+            "query": "SELECT DOCTOR_ID, FIRST_NAME, LAST_NAME, SPECIALIZATION, PHONE_NUMBER, YEARS_EXPERIENCE, HOSPITAL_BRANCH, EMAIL FROM APPS.DEMO_DOCTORS WHERE (UPPER(FIRST_NAME || ' ' || LAST_NAME) LIKE '%' || UPPER(:p_search_name) || '%' OR :p_search_name IS NULL) AND (SPECIALIZATION = :p_search_spec OR :p_search_spec IS NULL)",
+            "keyField": "DOCTOR_ID",
+            "bindVariables": {
+              "p_search_name": "f_search_name",
+              "p_search_spec": "f_search_spec"
+            }
+          },
+          "rowActions": {
+            "create": {
+              "pageCode": "H002_FORM",
+              "size": "xl",
+              "title": "Thêm Bác sĩ mới"
+            },
+            "detail": {
+              "pageCode": "H002_FORM",
+              "size": "xl",
+              "title": "Chi tiết Bác sĩ"
+            }
+          },
+          "tableConfig": {
+            "editing": {
+              "allowAdding": true,
+              "allowDeleting": true,
+              "allowUpdating": true,
+              "mode": "batch",
+              "confirmDelete": true
+            }
+          },
+          "columns": [
+            {
+              "key": "DOCTOR_ID",
+              "dataType": "string",
+              "label": "Mã Bác sĩ",
+              "readonly": true
+            },
+            {
+              "key": "FIRST_NAME",
+              "dataType": "string",
+              "label": "Họ và tên đệm"
+            },
+            {
+              "key": "LAST_NAME",
+              "dataType": "string",
+              "label": "Tên"
+            },
+            {
+              "key": "SPECIALIZATION",
+              "dataType": "string",
+              "label": "Chuyên ngành",
+              "controlType": "select",
+              "options": [
+                { "v": "Dermatology", "l": "Dermatology" },
+                { "v": "Pediatrics", "l": "Pediatrics" },
+                { "v": "Oncology", "l": "Oncology" },
+                { "v": "Cardiology", "l": "Cardiology" },
+                { "v": "Neurology", "l": "Neurology" },
+                { "v": "Psychiatry", "l": "Psychiatry" },
+                { "v": "Orthopedics", "l": "Orthopedics" },
+                { "v": "Ophthalmology", "l": "Ophthalmology" },
+                { "v": "Gastroenterology", "l": "Gastroenterology" },
+                { "v": "Radiology", "l": "Radiology" }
+              ]
+            },
+            {
+              "key": "PHONE_NUMBER",
+              "dataType": "string",
+              "label": "Số điện thoại"
+            },
+            {
+              "key": "YEARS_EXPERIENCE",
+              "dataType": "number",
+              "label": "Năm kinh nghiệm"
+            },
+            {
+              "key": "HOSPITAL_BRANCH",
+              "dataType": "string",
+              "label": "Chi nhánh"
+            },
+            {
+              "key": "EMAIL",
+              "dataType": "string",
+              "label": "Email"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
