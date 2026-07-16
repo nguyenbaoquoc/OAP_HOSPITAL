@@ -1,7 +1,5 @@
 {
-  "pagId": 10680,
   "pageType": "form",
-  "pageName": "HM_PATIENTS",
   "pageCode": "H001",
   "metadataVersion": 2,
   "title": "Hồ sơ Bệnh nhân",
@@ -20,7 +18,7 @@
         "collapsible": true
       },
       {
-        "id": "list_center",
+        "id": "center",
         "regionIds": [
           "kpi_region",
           "list_region"
@@ -128,26 +126,12 @@
             "row": 1
           },
           "metadata": {
-            "icon": "clipboard",
+            "icon": "list",
             "color": "green",
             "title": "w_cols",
             "dataSource": {
               "type": "query",
-              "bindVariables": [
-                {
-                  "name": "p_search_name",
-                  "sourceField": "f_search_name"
-                },
-                {
-                  "name": "p_search_phone",
-                  "sourceField": "f_search_phone"
-                },
-                {
-                  "name": "p_gender",
-                  "sourceField": "f_gender"
-                }
-              ],
-              "query": "SELECT COUNT(INSURANCE_NUMBER) AS VALUE FROM DEMO_PATIENTS WHERE (:p_search_name IS NULL OR LOWER(FIRST_NAME || ' ' || LAST_NAME) LIKE LOWER('%'||:p_search_name||'%')) AND (:p_search_phone IS NULL OR CONTACT_NUMBER LIKE '%'||:p_search_phone||'%') AND (:p_gender IS NULL OR GENDER = :p_gender)"
+              "query": "SELECT 11 AS VALUE FROM DUAL"
             }
           }
         },
@@ -211,7 +195,7 @@
     },
     {
       "id": "list_region",
-      "type": "card",
+      "type": "plain",
       "fields": [
         {
           "name": "tbl_patients",
@@ -244,31 +228,12 @@
               ],
               "query": "SELECT PATIENT_ID, FIRST_NAME, LAST_NAME, GENDER, DATE_OF_BIRTH, CONTACT_NUMBER, ADDRESS, REGISTRATION_DATE, INSURANCE_PROVIDER, INSURANCE_NUMBER, EMAIL FROM DEMO_PATIENTS WHERE (:p_search_name IS NULL OR LOWER(FIRST_NAME || ' ' || LAST_NAME) LIKE LOWER('%'||:p_search_name||'%')) AND (:p_search_phone IS NULL OR CONTACT_NUMBER LIKE '%'||:p_search_phone||'%') AND (:p_gender IS NULL OR GENDER = :p_gender) ORDER BY PATIENT_ID"
             },
-            "rowActions": {
-              "create": {
-                "pageCode": "H001_FORM",
-                "size": "xl",
-                "title": "Thêm Bệnh nhân mới"
-              },
-              "detail": {
-                "pageCode": "H001_FORM",
-                "size": "xl",
-                "title": "Chi tiết Bệnh nhân"
-              }
-            },
             "tableConfig": {
               "editing": {
                 "allowAdding": true,
-                "allowDeleting": true,
+                "allowDeleting": false,
                 "allowUpdating": true,
-                "mode": "batch",
-                "confirmDelete": true,
-                "texts": {
-                  "confirmDeleteMessage": "Bạn có chắc chắn muốn xóa bệnh nhân này?"
-                }
-              },
-              "sorting": {
-                "mode": "multiple"
+                "mode": "batch"
               },
               "height": "calc(100vh - 280px)",
               "inlineEdit": true,
@@ -277,36 +242,31 @@
             "columns": [
               {
                 "key": "PATIENT_ID",
-                "dataType": "text",
+                "dataType": "string",
                 "label": "COL_PATIENT_ID",
                 "visible": true,
-                "width": 130,
-                "allowSorting": true,
-                "allowEditing": false
+                "width": 130
               },
               {
                 "key": "FIRST_NAME",
-                "dataType": "text",
+                "dataType": "string",
                 "label": "COL_FIRST_NAME",
                 "visible": true,
-                "width": 120,
-                "allowSorting": true
+                "width": 120
               },
               {
                 "key": "LAST_NAME",
-                "dataType": "text",
+                "dataType": "string",
                 "label": "COL_LAST_NAME",
                 "visible": true,
-                "width": 120,
-                "allowSorting": true
+                "width": 120
               },
               {
                 "key": "GENDER",
-                "dataType": "text",
+                "dataType": "string",
                 "label": "COL_GENDER",
                 "visible": true,
-                "width": 100,
-                "allowSorting": true
+                "width": 100
               },
               {
                 "key": "DATE_OF_BIRTH",
@@ -314,24 +274,21 @@
                 "label": "COL_DATE_OF_BIRTH",
                 "visible": true,
                 "format": "dd/MM/yyyy",
-                "width": 120,
-                "allowSorting": true
+                "width": 120
               },
               {
                 "key": "CONTACT_NUMBER",
-                "dataType": "text",
+                "dataType": "string",
                 "label": "COL_CONTACT_NUMBER",
                 "visible": true,
-                "width": 140,
-                "allowSorting": true
+                "width": 140
               },
               {
                 "key": "ADDRESS",
-                "dataType": "text",
+                "dataType": "string",
                 "label": "COL_ADDRESS",
                 "visible": true,
-                "minWidth": 200,
-                "allowSorting": true
+                "minWidth": 200
               },
               {
                 "key": "REGISTRATION_DATE",
@@ -339,32 +296,59 @@
                 "label": "COL_REGISTRATION_DATE",
                 "visible": true,
                 "format": "dd/MM/yyyy",
-                "width": 120,
-                "allowSorting": true
+                "width": 120
               },
               {
                 "key": "INSURANCE_PROVIDER",
-                "dataType": "text",
+                "dataType": "string",
                 "label": "COL_INSURANCE_PROVIDER",
                 "visible": true,
-                "width": 180,
-                "allowSorting": true
+                "width": 180
               },
               {
                 "key": "INSURANCE_NUMBER",
-                "dataType": "text",
+                "dataType": "string",
                 "label": "COL_INSURANCE_NUMBER",
                 "visible": true,
-                "width": 150,
-                "allowSorting": true
+                "width": 150
               },
               {
                 "key": "EMAIL",
-                "dataType": "text",
+                "dataType": "string",
                 "label": "COL_EMAIL",
                 "visible": true,
-                "width": 180,
-                "allowSorting": true
+                "width": 180
+              },
+              {
+                "key": "ROW_ACTIONS",
+                "label": "COL_ACTIONS",
+                "type": "action",
+                "width": 100,
+                "fixed": true,
+                "fixedPosition": "right",
+                "buttons": [
+                  {
+                    "name": "delete_patient",
+                    "label": "Xóa",
+                    "hint": "Xóa bệnh nhân ngay lập tức",
+                    "icon": "trash",
+                    "variant": "danger",
+                    "actionConfig": {
+                      "type": "command",
+                      "commandMode": "plsql",
+                      "query": "BEGIN DELETE FROM DEMO_PATIENTS WHERE PATIENT_ID = :patient_code; END;",
+                      "bindVariables": [
+                        {
+                          "name": "patient_code",
+                          "sourceField": "PATIENT_ID",
+                          "source": "rowData"
+                        }
+                      ],
+                      "refreshAfter": true,
+                      "successMessage": "Đã xóa bệnh nhân thành công!"
+                    }
+                  }
+                ]
               }
             ]
           }
@@ -375,8 +359,5 @@
   "appCode": "hp002",
   "workspaceCode": "TASECOLAND",
   "sourceAppCode": "hp002",
-  "sourceWorkspaceCode": "TASECOLAND",
-  "description": "",
-  "defaultConfig": null,
-  "importConfig": null
+  "sourceWorkspaceCode": "TASECOLAND"
 }

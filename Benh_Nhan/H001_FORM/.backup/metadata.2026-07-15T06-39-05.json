@@ -1,0 +1,219 @@
+{
+  "pageType": "form",
+  "pageCode": "H001_FORM",
+  "metadataVersion": 2,
+  "title": "H001_FORM_TITLE",
+  "dataSource": {
+    "keyField": "PATIENT_ID",
+    "loadQuery": "SELECT PATIENT_ID, FIRST_NAME, LAST_NAME, GENDER, DATE_OF_BIRTH, CONTACT_NUMBER, ADDRESS, REGISTRATION_DATE, INSURANCE_PROVIDER, INSURANCE_NUMBER, EMAIL FROM DEMO_PATIENTS WHERE PATIENT_ID = :id",
+    "saveMode": "auto",
+    "tableName": "DEMO_PATIENTS"
+  },
+  "formConfig": {
+    "labelLocation": "top"
+  },
+  "layout": {
+    "orientation": "horizontal",
+    "panes": [
+      {
+        "id": "center",
+        "regionIds": [
+          "toolbar_region"
+        ]
+      }
+    ],
+    "toolbar": {
+      "breadcrumb": true,
+      "title": true
+    },
+    "type": "splitter"
+  },
+  "regions": [
+    {
+      "id": "toolbar_region",
+      "type": "plain",
+      "fields": [
+        {
+          "name": "patient_toolbar",
+          "type": "dx-toolbar",
+          "position": "top",
+          "breadcrumb": true,
+          "items": [
+            {
+              "type": "create",
+              "label": "BTN_CREATE",
+              "icon": "plus"
+            },
+            {
+              "type": "separator"
+            },
+            {
+              "type": "reset",
+              "label": "BTN_RESET",
+              "icon": "revert"
+            },
+            {
+              "type": "delete",
+              "label": "BTN_DELETE",
+              "icon": "trash",
+              "stylingMode": "outlined",
+              "variant": "danger"
+            },
+            {
+              "type": "submit",
+              "label": "BTN_SAVE",
+              "icon": "save",
+              "stylingMode": "contained",
+              "variant": "success"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "tabs": [
+    {
+      "id": "tab_general",
+      "label": "TAB_GENERAL",
+      "regions": [
+        {
+          "id": "general_info",
+          "type": "card",
+          "title": "REG_PATIENT_INFO",
+          "icon": "user",
+          "fields": [
+            {
+              "name": "PATIENT_ID",
+              "type": "text",
+              "label": "COL_PATIENT_ID",
+              "required": true,
+              "layout": {
+                "col": 1,
+                "colSpan": 4,
+                "row": 1
+              }
+            },
+            {
+              "name": "FIRST_NAME",
+              "type": "text",
+              "label": "COL_FIRST_NAME",
+              "required": true,
+              "layout": {
+                "col": 5,
+                "colSpan": 4,
+                "row": 1
+              }
+            },
+            {
+              "name": "LAST_NAME",
+              "type": "text",
+              "label": "COL_LAST_NAME",
+              "required": true,
+              "layout": {
+                "col": 9,
+                "colSpan": 4,
+                "row": 1
+              }
+            },
+            {
+              "name": "GENDER",
+              "type": "select",
+              "label": "COL_GENDER",
+              "lov": {
+                "manual": [
+                  {
+                    "label": "M",
+                    "value": "M"
+                  },
+                  {
+                    "label": "F",
+                    "value": "F"
+                  }
+                ]
+              },
+              "layout": {
+                "col": 1,
+                "colSpan": 4,
+                "row": 2
+              }
+            },
+            {
+              "name": "DATE_OF_BIRTH",
+              "type": "date",
+              "label": "COL_DATE_OF_BIRTH",
+              "layout": {
+                "col": 5,
+                "colSpan": 4,
+                "row": 2
+              }
+            },
+            {
+              "name": "CONTACT_NUMBER",
+              "type": "text",
+              "label": "COL_CONTACT_NUMBER",
+              "layout": {
+                "col": 9,
+                "colSpan": 4,
+                "row": 2
+              }
+            },
+            {
+              "name": "ADDRESS",
+              "type": "text",
+              "label": "COL_ADDRESS",
+              "layout": {
+                "col": 1,
+                "colSpan": 12,
+                "row": 3
+              }
+            },
+            {
+              "name": "REGISTRATION_DATE",
+              "type": "date",
+              "label": "COL_REGISTRATION_DATE",
+              "layout": {
+                "col": 1,
+                "colSpan": 4,
+                "row": 4
+              }
+            },
+            {
+              "name": "INSURANCE_PROVIDER",
+              "type": "text",
+              "label": "COL_INSURANCE_PROVIDER",
+              "layout": {
+                "col": 5,
+                "colSpan": 4,
+                "row": 4
+              }
+            },
+            {
+              "name": "INSURANCE_NUMBER",
+              "type": "text",
+              "label": "COL_INSURANCE_NUMBER",
+              "layout": {
+                "col": 9,
+                "colSpan": 4,
+                "row": 4
+              }
+            },
+            {
+              "name": "EMAIL",
+              "type": "text",
+              "label": "COL_EMAIL",
+              "layout": {
+                "col": 1,
+                "colSpan": 12,
+                "row": 5
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "appCode": "hp002",
+  "workspaceCode": "TASECOLAND",
+  "sourceAppCode": "hp002",
+  "sourceWorkspaceCode": "TASECOLAND"
+}

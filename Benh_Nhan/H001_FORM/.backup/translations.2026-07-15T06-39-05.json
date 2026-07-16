@@ -1,0 +1,60 @@
+{
+  "en": {
+    "title": "Patient Form",
+    "fields": {
+      "H001_FORM_TITLE": "Patient Form",
+      "BTN_CREATE": "Add New",
+      "BTN_RESET": "Reset",
+      "BTN_DELETE": "Delete",
+      "BTN_SAVE": "Save",
+      "TAB_GENERAL": "General Information",
+      "REG_PATIENT_INFO": "Patient Details",
+      "COL_PATIENT_ID": "Patient ID",
+      "COL_FIRST_NAME": "First Name",
+      "COL_LAST_NAME": "Last Name",
+      "COL_GENDER": "Gender",
+      "COL_DATE_OF_BIRTH": "Date of Birth",
+      "COL_CONTACT_NUMBER": "Phone Number",
+      "COL_ADDRESS": "Address",
+      "COL_REGISTRATION_DATE": "Registration Date",
+      "COL_INSURANCE_PROVIDER": "Insurance Provider",
+      "COL_INSURANCE_NUMBER": "Insurance Number",
+      "COL_EMAIL": "Email"
+    },
+    "lov": {
+      "COL_GENDER": {
+        "M": "Male",
+        "F": "Female"
+      }
+    }
+  },
+  "vi": {
+    "title": "Biểu mẫu Bệnh nhân",
+    "fields": {
+      "H001_FORM_TITLE": "Biểu mẫu Bệnh nhân",
+      "BTN_CREATE": "Thêm mới",
+      "BTN_RESET": "Đặt lại",
+      "BTN_DELETE": "Xóa",
+      "BTN_SAVE": "Lưu",
+      "TAB_GENERAL": "Thông tin chung",
+      "REG_PATIENT_INFO": "Thông tin Bệnh nhân",
+      "COL_PATIENT_ID": "Mã Bệnh Nhân",
+      "COL_FIRST_NAME": "Họ",
+      "COL_LAST_NAME": "Tên",
+      "COL_GENDER": "Giới tính",
+      "COL_DATE_OF_BIRTH": "Ngày sinh",
+      "COL_CONTACT_NUMBER": "Số điện thoại",
+      "COL_ADDRESS": "Địa chỉ",
+      "COL_REGISTRATION_DATE": "Ngày đăng ký",
+      "COL_INSURANCE_PROVIDER": "Nhà cung cấp Bảo hiểm",
+      "COL_INSURANCE_NUMBER": "Số Bảo hiểm",
+      "COL_EMAIL": "Email"
+    },
+    "lov": {
+      "COL_GENDER": {
+        "M": "Nam",
+        "F": "Nữ"
+      }
+    }
+  }
+}
